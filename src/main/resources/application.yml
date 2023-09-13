@@ -1,0 +1,27 @@
+server:
+    port: ${PORT:8080}
+
+database:
+  name: ${DATABASE:test_db_for_practice}
+  username: ${DB_USERNAME:postgres}
+  password: ${DB_PASSWORD:root} 
+  host: ${DB_HOST:localhost}
+  port: ${DB_PORT:5432}
+  type: ${DB_TYPE:postgresql}
+  
+  
+  #database
+spring:
+  application:
+    name: spring-webflux-demo
+  r2dbc:
+    url: r2dbc:${database.type}://${database.host}:${database.port}/${database.name}
+    username: ${database.username}
+    password: ${database.password}
+    name: ${database.name}
+ 
+  liquibase:
+    url: jdbc:${database.type}://${database.host}:${database.port}/${database.name}
+    user: ${database.username}
+    password: ${database.password}
+    change-log: classpath:db/changelog/db-master-changelog.yml
